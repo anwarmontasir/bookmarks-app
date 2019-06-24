@@ -75,11 +75,14 @@ class App extends Component {
         <h1>Bookmarks!</h1>
         <Nav />
         <div className='content' aria-live='polite'>
-          <Route path='/add-bookmark' render={() =>
-            <AddBookmark
-              onAddBookmark={this.addBookmark}
-              onClickCancel={() => this.changePage('list')}
-            />
+          <Route path='/add-bookmark' 
+            render={({history }) => {
+              /* The push method was used to "push" a new path onto the browser's history, i.e. to navigate to a new page. We can also use the history.goBack() method to go back to the previous entry in the browser's history; as you would when clicking the back button. */
+              return <AddBookmark
+                onAddBookmark={this.addBookmark}
+                onClickCancel={() => { history.push('/') }}
+              />
+            }
           }
           />
           <Route exact path='/' render={() => 
